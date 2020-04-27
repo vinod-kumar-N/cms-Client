@@ -13,6 +13,9 @@ const Header = (props) => {
         <button onClick={props.callLogin} className="cmnBtn">
           Login
         </button>
+        <button onClick={props.callRegister} className="cmnBtn">
+          Register
+        </button>
       </div>
     </header>
   );
