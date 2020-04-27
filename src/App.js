@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/header";
+import Login from "./components/login";
+import "./modal.css";
+import "./App.scss";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+    };
+  }
+  toggleLogin = () => {
+    this.setState({ isLogin: !this.state.isLogin });
+  };
+  render() {
+    return (
+      <>
+        <Header callLogin={this.toggleLogin} />
+        <section className="mainContent">
+          {this.state.isLogin && <Login closeModal={this.toggleLogin} />}
+        </section>
+      </>
+    );
+  }
 }
 
 export default App;
