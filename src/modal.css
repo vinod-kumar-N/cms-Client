@@ -28,7 +28,8 @@ a {
     padding: 0 !important;
     z-index: 101;
     background-color: #fff;
-    border: 1px solid #f6f6f6
+    border: 1px solid #f6f6f6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
 }
 
 .ui-dialog input {
@@ -36,6 +37,10 @@ a {
     padding: 5px;
     margin-bottom: 5px;
     box-sizing: border-box;
+}
+
+.ui-dialog .title {
+    color: #3498db;
 }
 
 .ui-dialog.maximized {
@@ -129,16 +134,17 @@ a {
 .ui-dialog .ui-dialog-buttonpane button {
     margin: 0 .5em;
     cursor: pointer;
-    background-color: #f6f6f6;
+    background-color: #3498db;
+    color: #fff;
     padding: .5em 1em;
     outline: none;
-    border: 1px solid #ccc;
-    border-radius: 3px
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .ui-dialog .ui-dialog-buttonpane button:hover {
-    background-color: #ccc;
-    border: 1px solid #bbb
+    background-color: #2980b9;
 }
 
 .ui-dialog .react-resizable-handle {

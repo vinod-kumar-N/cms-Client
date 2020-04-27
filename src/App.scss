@@ -49,3 +49,17 @@ img {
   background: none;
   cursor: pointer;
 }
+
+.error {
+  padding: 5px;
+  background: #e74c3c;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.success {
+  padding: 5px;
+  background: #2ecc71;
+  color: #fff;
+  margin-bottom: 5px;
+}
