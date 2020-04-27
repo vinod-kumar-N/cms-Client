@@ -3,7 +3,8 @@ import Modal from "react-dialog";
 import Textbox from "../textbox";
 
 const Login = (props) => {
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [pwd, setPwd] = useState();
   return (
     <section className="login">
       <Modal
@@ -23,12 +24,12 @@ const Login = (props) => {
           },
         ]}
       >
+        <Textbox placeholder="Enter Email" type="email" onChangeFn={setEmail} />
         <Textbox
-          placeholder="Enter Email"
-          type="email"
-          onChangeFn={setUsername}
+          placeholder="Enter Password"
+          type="password"
+          onChangeFn={setPwd}
         />
-        <Textbox placeholder="Enter Password" type="password" />
       </Modal>
     </section>
   );
