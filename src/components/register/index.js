@@ -34,10 +34,22 @@ const Register = (props) => {
         options
       )
       .then((res) => {
-        console.log(res);
+        setToastMessgae((prevState) => {
+          return {
+            ...prevState,
+            toastClass: "success",
+            message: res.data.message,
+          };
+        });
         })
       .catch((err) => {
-        console.log(err);
+        setToastMessgae((prevState) => {
+          return {
+            ...prevState,
+            toastClass: "error",
+            message: err.response.data.message,
+          };
+        });
       });
     };
 
