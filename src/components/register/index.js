@@ -22,12 +22,12 @@ const Register = (props) => {
         headers: { "Content-Type": "application/json" },
       };
       API.post(
-        "/api/user/register",
+        "/users/register",
         {
           name: name,
           userName: uName,
           password: pwd,
-          confirmedpwd: confirmPwd,
+          confirmpwd: confirmPwd,
           designation: designation,
           email: email
         },
