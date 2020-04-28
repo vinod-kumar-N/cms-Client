@@ -11,9 +11,9 @@ const Register = (props) => {
     });
 
   const [name, setName] = useState();
-  const [uName, setUsername] = useState();
-  const [pwd, setPwd] = useState();
-  const [confirmPwd, setConfirmedPwd] = useState();
+  const [userName, setUsername] = useState();
+  const [password, setPwd] = useState();
+  const [confirmpwd, setConfirmedPwd] = useState();
   const [designation, setDesignation] = useState();
   const [email, setEmail] = useState();
 
@@ -24,12 +24,12 @@ const Register = (props) => {
       API.post(
         "/users/register",
         {
-          name: name,
-          userName: uName,
-          password: pwd,
-          confirmpwd: confirmPwd,
-          designation: designation,
-          email: email
+          name,
+          userName,
+          password,
+          confirmpwd,
+          designation,
+          email
         },
         options
       )
