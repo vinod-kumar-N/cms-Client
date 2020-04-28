@@ -38,7 +38,7 @@ const Register = (props) => {
           return {
             ...prevState,
             toastClass: "success",
-            message: res.data.message,
+            message: `Registration is successful for the user ${res.data.name}`
           };
         });
         })
