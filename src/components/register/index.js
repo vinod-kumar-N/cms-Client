@@ -1,14 +1,46 @@
 import React, { useState } from "react";
 import Modal from "react-dialog";
 import Textbox from "../textbox";
+import API from "../../api";
 
 const Register = (props) => {
+
+    const [toastMessgae, setToastMessgae] = useState({
+    toastClass: "none",
+    message: null,
+    });
+
   const [name, setName] = useState();
-  const [username, setUsername] = useState();
+  const [uName, setUsername] = useState();
   const [pwd, setPwd] = useState();
-  const [confirmedpwd, setConfirmedPwd] = useState();
+  const [confirmPwd, setConfirmedPwd] = useState();
   const [designation, setDesignation] = useState();
   const [email, setEmail] = useState();
+
+  const register = () => {
+    const options = {
+        headers: { "Content-Type": "application/json" },
+      };
+      API.post(
+        "/api/user/register",
+        {
+          name: name,
+          userName: uName,
+          password: pwd,
+          confirmedpwd: confirmPwd,
+          designation: designation,
+          email: email
+        },
+        options
+      )
+      .then((res) => {
+        console.log(res);
+        })
+      .catch((err) => {
+        console.log(err);
+      });
+    };
+
   return (
     <section className="register">
       <Modal
@@ -24,10 +56,15 @@ const Register = (props) => {
           },
           {
             text: "Submit",
-            onClick: () => {},
-          },
+            onClick: () => {
+                register();
+            },
+          }
         ]}
       >
+         {toastMessgae && (
+          <p className={toastMessgae.toastClass}>{toastMessgae.message}</p>
+        )}
         <Textbox placeholder="Enter Name" type="text" onChangeFn={setName} />
         <Textbox placeholder="Enter Username" type="text" onChangeFn={setUsername} />
         <Textbox
