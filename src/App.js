@@ -2,8 +2,10 @@ import React from "react";
 import Header from "./components/header";
 import Login from "./components/login";
 import Register from "./components/register";
+import Banner from "./components/banner"
 import "./modal.css";
 import "./App.scss";
+import "./components/banner/banner.scss";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +28,9 @@ class App extends React.Component {
         <section className="mainContent">
           {this.state.isLogin && <Login closeModal={this.toggleLogin} />}
           {this.state.isRegister && <Register closeModal={this.toggleRegister} />}
+
+        <Banner></Banner>
+
         </section>
         
       </>
