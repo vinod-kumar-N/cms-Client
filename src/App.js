@@ -7,6 +7,8 @@ import "./modal.css";
 import "./App.scss";
 import "./components/banner/banner.scss";
 import Footer from "./components/footer"
+import ContentSlot from "./components/contentSlot";
+import "./components/contentSlot/contentSlot.scss";
 
 class App extends React.Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class App extends React.Component {
           {this.state.isRegister && <Register closeModal={this.toggleRegister} />}
 
         <Banner></Banner>
-
+        <ContentSlot></ContentSlot>
         <Footer></Footer>
         </section>
         
