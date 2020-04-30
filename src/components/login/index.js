@@ -34,6 +34,9 @@ const Login = (props) => {
             message: res.data.message,
           };
         });
+        setTimeout(() => {
+          props.closeModal();
+        }, 1000);
       })
       .catch((err) => {
         setToastMessgae((prevState) => {
