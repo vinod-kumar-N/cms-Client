@@ -1,5 +1,6 @@
 import React from "react";
 import "./header.scss";
+import { connect } from "react-redux";
 
 const Header = (props) => {
   return (
@@ -10,15 +11,26 @@ const Header = (props) => {
         </div>
       </div>
       <div className="rightSection">
-        <button onClick={props.callLogin} className="cmnBtn">
-          Login
-        </button>
-        <button onClick={props.callRegister} className="cmnBtn">
-          Register
-        </button>
+        {!props.userName ? (
+          <>
+            <button onClick={props.callLogin} className="cmnBtn">
+              Login
+            </button>
+            <button onClick={props.callRegister} className="cmnBtn">
+              Register
+            </button>
+          </>
+        ) : (
+          <button className="cmnBtn">{`Welcome ${props.userName}`}</button>
+        )}
       </div>
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = (store) => ({
+  userName: store.userName,
+});
+const mapDispatchToProps = (dispatch) => {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

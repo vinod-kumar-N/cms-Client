@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Modal from "react-dialog";
 import Textbox from "../textbox";
 import API from "../../api";
+import { connect } from "react-redux";
+import { setName } from "../../actions";
 
 const Login = (props) => {
   const [toastMessgae, setToastMessgae] = useState({
@@ -23,6 +25,8 @@ const Login = (props) => {
       options
     )
       .then((res) => {
+        props.setName(res.data.name);
+        localStorage.setItem("auth_token", res.data.token);
         setToastMessgae((prevState) => {
           return {
             ...prevState,
@@ -41,8 +45,10 @@ const Login = (props) => {
         });
       });
   };
+
   return (
     <section className="login">
+      {props.userName}
       <Modal
         title="Login"
         modal={true}
@@ -76,5 +82,15 @@ const Login = (props) => {
     </section>
   );
 };
+const mapStateToProps = (store) => ({
+  userName: store.userName,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName: (userName) => dispatch(setName(userName)),
+  };
+};
 
-export default Login;
+const LoginForm = connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default LoginForm;
