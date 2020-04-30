@@ -46,7 +46,7 @@ const Banner = () => {
                 {photos.map((photo) => {
                     return (
                         <div>
-                            <img width="100%" src={photo.url}></img>
+                            <img alt="" width="100%" src={photo.url}></img>
                         </div>
                     )
                 })}

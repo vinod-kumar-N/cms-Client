@@ -6,6 +6,7 @@ import Banner from "./components/banner"
 import "./modal.css";
 import "./App.scss";
 import "./components/banner/banner.scss";
+import Footer from "./components/footer"
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
 
         <Banner></Banner>
 
+        <Footer></Footer>
         </section>
         
       </>
