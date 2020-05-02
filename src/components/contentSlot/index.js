@@ -2,9 +2,7 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Link, BrowserRouter as Router} from 'react-router-dom';
-import ContentDetails from "./contentDetails"
-
+import { Link, BrowserRouter as Router, useHistory } from "react-router-dom";
 
 const photos = [
   {
@@ -34,7 +32,7 @@ const photos = [
   },
 ];
 
-const Banner = () => {
+const ContentSlot = () => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -44,6 +42,7 @@ const Banner = () => {
     className: "slides",
   };
 
+  let history = useHistory();
   return (
     <div>
       <Slider {...settings}>
@@ -53,8 +52,13 @@ const Banner = () => {
               <img alt="" width="100%" src={photo.url}></img>
               <div className="image-text">
                 <Router>
-                    <Link to="/react">Some text</Link>
-              </Router>
+                  <Link
+                    to="/contentDetails"
+                    onClick={() => history.push("/contentDetails")}
+                  >
+                    About
+                  </Link>
+                </Router>
               </div>
             </div>
           );
@@ -63,4 +67,4 @@ const Banner = () => {
     </div>
   );
 };
-export default Banner;
+export default ContentSlot;
