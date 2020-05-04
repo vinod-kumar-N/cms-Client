@@ -51,7 +51,6 @@ const Login = (props) => {
 
   return (
     <section className="login">
-      {props.userName}
       <Modal
         title="Login"
         modal={true}
@@ -93,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
     setName: (userName) => dispatch(setName(userName)),
   };
 };
-
-const LoginForm = connect(mapStateToProps, mapDispatchToProps)(Login);
-
-export default LoginForm;
+Login.defaultProps = {
+  userName: "Guest",
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

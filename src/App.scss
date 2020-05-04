@@ -7,6 +7,11 @@
   pointer-events: none;
 }
 
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -66,5 +71,6 @@ img {
 
 .mainContent {
   max-width: 1500px;
+  min-height: 900px;
   margin: auto;
 }

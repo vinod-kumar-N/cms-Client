@@ -34,7 +34,7 @@ const photos = [
 const Banner = () => {
   const settings = {
     dots: true,
-    fade:true,
+    fade: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -44,16 +44,14 @@ const Banner = () => {
   };
 
   return (
-    <div>
+    <div className={"banner"}>
       <Slider {...settings}>
-        {photos.map((photo) => {
-          return (
-            <div>
-              <img alt="" width="100%" src={photo.url}></img>
-              <p>test</p>
-            </div>
-          );
-        })}
+        {photos.map((photo, key) => (
+          <div key={key}>
+            <img alt="" width="100%" src={photo.url}></img>
+            <p>test</p>
+          </div>
+        ))}
       </Slider>
     </div>
   );

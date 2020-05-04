@@ -7,7 +7,7 @@ const Header = (props) => {
     <header className="header">
       <div className="leftSection">
         <div className="logo">
-          <img src="logo-placeholder.png" alt="logo" />
+          <img src="promo-slot.png" alt="logo" />
         </div>
       </div>
       <div className="rightSection">
@@ -31,6 +31,6 @@ const Header = (props) => {
 const mapStateToProps = (store) => ({
   userName: store.userName,
 });
-const mapDispatchToProps = (dispatch) => {};
+const mapDispatchToProps = (dispatch) => null;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
