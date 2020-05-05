@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Modal from "react-dialog";
 import Textbox from "../textbox";
 import API from "../../api";
+import { connect } from "react-redux";
+import { setName } from "../../actions";
 
 const Register = (props) => {
-
-    const [toastMessgae, setToastMessgae] = useState({
+  const [toastMessgae, setToastMessgae] = useState({
     toastClass: "none",
     message: null,
-    });
+  });
 
   const [name, setName] = useState();
   const [userName, setUsername] = useState();
@@ -19,29 +20,34 @@ const Register = (props) => {
 
   const register = () => {
     const options = {
-        headers: { "Content-Type": "application/json" },
-      };
-      API.post(
-        "/users/register",
-        {
-          name,
-          userName,
-          password,
-          confirmpwd,
-          designation,
-          email
-        },
-        options
-      )
+      headers: { "Content-Type": "application/json" },
+    };
+    API.post(
+      "/users/register",
+      {
+        name,
+        userName,
+        password,
+        confirmpwd,
+        designation,
+        email,
+      },
+      options
+    )
       .then((res) => {
+        props.setName(res.data.name);
+        localStorage.setItem("auth_token", res.data.token);
         setToastMessgae((prevState) => {
           return {
             ...prevState,
             toastClass: "success",
-            message: `Registration is successful for the user ${res.data.name}`
+            message: res.data.message,
           };
         });
-        })
+        setTimeout(() => {
+          props.closeModal();
+        }, 1000);
+      })
       .catch((err) => {
         setToastMessgae((prevState) => {
           return {
@@ -51,7 +57,7 @@ const Register = (props) => {
           };
         });
       });
-    };
+  };
 
   return (
     <section className="register">
@@ -69,31 +75,50 @@ const Register = (props) => {
           {
             text: "Submit",
             onClick: () => {
-                register();
+              register();
             },
-          }
+          },
         ]}
       >
-         {toastMessgae && (
+        {toastMessgae && (
           <p className={toastMessgae.toastClass}>{toastMessgae.message}</p>
         )}
         <Textbox placeholder="Enter Name" type="text" onChangeFn={setName} />
-        <Textbox placeholder="Enter Username" type="text" onChangeFn={setUsername} />
+        <Textbox
+          placeholder="Enter Username"
+          type="text"
+          onChangeFn={setUsername}
+        />
         <Textbox
           placeholder="Enter Password"
           type="password"
           onChangeFn={setPwd}
         />
-         <Textbox
+        <Textbox
           placeholder="Enter Confirmed Password"
           type="password"
           onChangeFn={setConfirmedPwd}
         />
-        <Textbox placeholder="Enter Designation" type="text" onChangeFn={setDesignation} />
+        <Textbox
+          placeholder="Enter Designation"
+          type="text"
+          onChangeFn={setDesignation}
+        />
         <Textbox placeholder="Enter Email" type="email" onChangeFn={setEmail} />
       </Modal>
     </section>
   );
 };
 
-export default Register;
+const mapStateToProps = (store) => ({
+  userName: store.userName,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName: (userName) => dispatch(setName(userName)),
+  };
+};
+Register.defaultProps = {
+  userName: "Guest",
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
