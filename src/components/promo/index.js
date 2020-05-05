@@ -2,7 +2,7 @@ import React from "react";
 import "./promo.scss";
 const Promo = (props) => {
   return (
-    <section className={"promo-slot"}>
+    <section className={"promo-slot"} onClick={props.clickFn}>
       <div className="img-section">
         <img src={props.src} alt="" />
       </div>
@@ -16,6 +16,10 @@ const Promo = (props) => {
       </div>
     </section>
   );
+};
+
+Promo.defaultProps = {
+  clickFn: () => {},
 };
 
 export default Promo;

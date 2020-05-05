@@ -6,7 +6,7 @@ import Register from "../register";
 import Banner from "../banner";
 import ContentSlot from "../contentSlot";
 import Promo from "../promo";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import API from "../../api";
 import { connect } from "react-redux";
 import { setName } from "../../actions";
@@ -26,6 +26,9 @@ class HomeComponent extends React.Component {
   };
   toggleRegister = () => {
     this.setState({ isRegister: !this.state.isRegister });
+  };
+  redirectToPage = (path) => {
+    this.props.history.push(path);
   };
   getUser = () => {
     const options = {
@@ -57,10 +60,10 @@ class HomeComponent extends React.Component {
               title={"Template"}
               src="./website.png"
               content={"Hello World"}
-            >
-              <p>asdasdasdads</p>
-              <Link to="/pageBuilder">Click Here</Link>
-            </Promo>
+              clickFn={() => {
+                this.redirectToPage("/pageBuilder");
+              }}
+            ></Promo>
           </div>
         </section>
         <Footer></Footer>
@@ -76,4 +79,6 @@ const mapDispatchToProps = (dispatch) => {
     setName: (userName) => dispatch(setName(userName)),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeComponent)
+);
