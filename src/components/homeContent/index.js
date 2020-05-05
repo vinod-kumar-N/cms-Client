@@ -63,7 +63,6 @@ class HomeComponent extends React.Component {
             </Promo>
           </div>
         </section>
-        <button onClick={this.getUsers}>get Users</button>
         <Footer></Footer>
       </>
     );
