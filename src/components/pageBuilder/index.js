@@ -1,11 +1,24 @@
 import React from "react";
 
 class PageBuilder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null,
+    };
+  }
+  handleChange = (event) => {
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0]),
+    });
+  };
   render() {
     return (
       <div className="page-builder">
-        <h2>I am in Page sdasdas</h2>
-        <p>Some Page Builder Text here</p>
+        <label for="image">
+          <input type="file" onChange={this.handleChange} />
+          <img src={this.state.file} />
+        </label>
       </div>
     );
   }
