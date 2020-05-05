@@ -8,7 +8,11 @@ const Promo = (props) => {
       </div>
       <div className={"content-section"}>
         <h2>{props.title}</h2>
-        <p>{props.content}</p>
+        {props.children && props.children.length ? (
+          props.children
+        ) : (
+          <p>{props.content}</p>
+        )}
       </div>
     </section>
   );

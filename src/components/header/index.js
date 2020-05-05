@@ -31,6 +31,6 @@ const Header = (props) => {
 const mapStateToProps = (store) => ({
   userName: store.userName,
 });
-const mapDispatchToProps = (dispatch) => null;
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

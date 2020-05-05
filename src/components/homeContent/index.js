@@ -5,7 +5,8 @@ import Login from "../login";
 import Register from "../register";
 import Banner from "../banner";
 import ContentSlot from "../contentSlot";
-
+import Promo from "../promo";
+import { Link } from "react-router-dom";
 class HomeComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +35,16 @@ class HomeComponent extends React.Component {
           )}
           <Banner></Banner>
           <ContentSlot></ContentSlot>
+          <div className={"pageTemplate"}>
+            <Promo
+              title={"Template"}
+              src="./website.png"
+              content={"Hello World"}
+            >
+              <p>asdasdasdads</p>
+              <Link to="/pageBuilder">Click Here</Link>
+            </Promo>
+          </div>
         </section>
         <Footer></Footer>
       </>
