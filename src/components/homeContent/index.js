@@ -7,6 +7,9 @@ import Banner from "../banner";
 import ContentSlot from "../contentSlot";
 import Promo from "../promo";
 import { Link } from "react-router-dom";
+import API from "../../api";
+import { connect } from "react-redux";
+import { setName } from "../../actions";
 class HomeComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -15,11 +18,25 @@ class HomeComponent extends React.Component {
       isRegister: false,
     };
   }
+  componentDidMount() {
+    localStorage.getItem("auth_token") && this.getUser();
+  }
   toggleLogin = () => {
     this.setState({ isLogin: !this.state.isLogin });
   };
   toggleRegister = () => {
     this.setState({ isRegister: !this.state.isRegister });
+  };
+  getUser = () => {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        auth_token: localStorage.getItem("auth_token"),
+      },
+    };
+    API.get("/users/getUser", options).then((res) => {
+      this.props.setName(res.data.name);
+    });
   };
   render() {
     return (
@@ -46,10 +63,18 @@ class HomeComponent extends React.Component {
             </Promo>
           </div>
         </section>
+        <button onClick={this.getUsers}>get Users</button>
         <Footer></Footer>
       </>
     );
   }
 }
-
-export default HomeComponent;
+const mapStateToProps = (store) => ({
+  userName: store.userName,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setName: (userName) => dispatch(setName(userName)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
