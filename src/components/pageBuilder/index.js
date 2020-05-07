@@ -6,7 +6,6 @@ class PageBuilder extends React.Component {
     return (
       <div className="page-builder">
         <BuilderHeader />
-        <Sketch />
       </div>
     );
   }

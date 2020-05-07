@@ -16,6 +16,12 @@ class BuilderHeader extends React.Component {
         b: "94",
         a: "1",
       },
+      headerSection: {
+        r: "52",
+        g: "73",
+        b: "94",
+        a: "1",
+      },
     };
   }
   handleChange = (event) => {
@@ -67,11 +73,11 @@ class BuilderHeader extends React.Component {
           background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
         },
         swatch: {
-          padding: "5px",
-          background: "#fff",
-          borderRadius: "1px",
-          boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
-          display: "inline-block",
+          // padding: "5px",
+          //background: "#fff",
+          //borderRadius: "1px",
+          //boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
+          //display: "inline-block",
           cursor: "pointer",
         },
         popover: {
@@ -85,11 +91,16 @@ class BuilderHeader extends React.Component {
           bottom: "0px",
           left: "0px",
         },
+        headerSection: {
+          height: "40px",
+          display: "flex",
+          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+        },
       },
     });
 
     return (
-      <header className="header-section">
+      <header style={styles.headerSection}>
         <div class="leftSection">
           <div className="logo-container" onClick={this.callFileUpload}>
             <img src={this.state.file} alt="logo"></img>
