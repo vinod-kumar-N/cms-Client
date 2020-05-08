@@ -18,7 +18,8 @@
     "react-scripts": "3.4.1",
     "react-slick": "^0.25.2",
     "redux": "^4.0.5",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "use-draggable": "^1.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
