@@ -25,12 +25,16 @@ class BuilderHeader extends React.Component {
           file: e.target.result,
         },
         options
-      ).then((res) => {
-        this.setState({
-          file: res.data.imapgePath,
+      )
+        .then((res) => {
+          this.setState({
+            file: res.data.imapgePath,
+          });
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        console.log(res);
-      });
     };
   };
   callFileUpload = () => {

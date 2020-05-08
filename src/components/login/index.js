@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Modal from "react-dialog";
 import Textbox from "../textbox";
 import API from "../../api";
 import { connect } from "react-redux";
 import { setName } from "../../actions";
+import {
+  initialState,
+  registrationReducer,
+} from "../../store/registrationStore";
 
 const Login = (props) => {
+  const [state, dispatch] = useReducer(registrationReducer, initialState);
   const [toastMessgae, setToastMessgae] = useState({
     toastClass: "none",
     message: null,
   });
-  const [email, setEmail] = useState(null);
-  const [pwd, setPwd] = useState(null);
+  const dispatchFn = (type, payload) => {
+    dispatch({ type: type, payload: payload });
+  };
   const login = () => {
     const options = {
       headers: { "Content-Type": "application/json" },
@@ -19,8 +25,8 @@ const Login = (props) => {
     API.post(
       "/users/login",
       {
-        email: email,
-        password: pwd,
+        email: state.email,
+        password: state.password,
       },
       options
     )
@@ -74,11 +80,19 @@ const Login = (props) => {
           <p className={toastMessgae.toastClass}>{toastMessgae.message}</p>
         )}
 
-        <Textbox placeholder="Enter Email" type="email" onChangeFn={setEmail} />
+        <Textbox
+          placeholder="Enter Email"
+          type="email"
+          onChangeFn={(emailArg) => {
+            dispatchFn("SET_EMAIL", emailArg);
+          }}
+        />
         <Textbox
           placeholder="Enter Password"
           type="password"
-          onChangeFn={setPwd}
+          onChangeFn={(pwdArg) => {
+            dispatchFn("SET_PSD", pwdArg);
+          }}
         />
       </Modal>
     </section>

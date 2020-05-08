@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Modal from "react-dialog";
 import Textbox from "../textbox";
 import API from "../../api";
 import { connect } from "react-redux";
 import { setName } from "../../actions";
+import {
+  initialState,
+  registrationReducer,
+} from "../../store/registrationStore";
 
 const Register = (props) => {
+  const [state, dispatch] = useReducer(registrationReducer, initialState);
+
+  const dispatchFn = (type, payload) => {
+    dispatch({ type: type, payload: payload });
+  };
   const [toastMessgae, setToastMessgae] = useState({
     toastClass: "none",
     message: null,
   });
-
-  const [name, setName] = useState();
-  const [userName, setUsername] = useState();
-  const [password, setPwd] = useState();
-  const [confirmpwd, setConfirmedPwd] = useState();
-  const [designation, setDesignation] = useState();
-  const [email, setEmail] = useState();
 
   const register = () => {
     const options = {
@@ -25,12 +27,7 @@ const Register = (props) => {
     API.post(
       "/users/register",
       {
-        name,
-        userName,
-        password,
-        confirmpwd,
-        designation,
-        email,
+        ...state,
       },
       options
     )
@@ -83,28 +80,49 @@ const Register = (props) => {
         {toastMessgae && (
           <p className={toastMessgae.toastClass}>{toastMessgae.message}</p>
         )}
-        <Textbox placeholder="Enter Name" type="text" onChangeFn={setName} />
+        <Textbox
+          placeholder="Enter Name"
+          type="text"
+          onChangeFn={(name) => {
+            dispatchFn("SET_NAME", name);
+          }}
+        />
         <Textbox
           placeholder="Enter Username"
           type="text"
-          onChangeFn={setUsername}
+          onChangeFn={(uname) => {
+            dispatchFn("SET_USERNAME", uname);
+          }}
+        />
+
+        <Textbox
+          placeholder="Enter Email"
+          type="email"
+          onChangeFn={(email) => {
+            dispatchFn("SET_EMAIL", email);
+          }}
         />
         <Textbox
           placeholder="Enter Password"
           type="password"
-          onChangeFn={setPwd}
+          onChangeFn={(pwd) => {
+            dispatchFn("SET_PSD", pwd);
+          }}
         />
         <Textbox
           placeholder="Enter Confirmed Password"
           type="password"
-          onChangeFn={setConfirmedPwd}
+          onChangeFn={(cpwd) => {
+            dispatchFn("SET_CONFIRMPSD", cpwd);
+          }}
         />
         <Textbox
           placeholder="Enter Designation"
           type="text"
-          onChangeFn={setDesignation}
+          onChangeFn={(designation) => {
+            dispatchFn("SET_DESIGNATION", designation);
+          }}
         />
-        <Textbox placeholder="Enter Email" type="email" onChangeFn={setEmail} />
       </Modal>
     </section>
   );
